@@ -1,0 +1,123 @@
+﻿@model IEnumerable<SwitchTest.Models.Switch>
+
+@{
+    ViewData["Title"] = "Коммутаторы";
+
+    SwitchTest.Models.Page page = new SwitchTest.Models.Page();
+    SwitchTest.Models.SwitchSearchModel searchModel = new SwitchTest.Models.SwitchSearchModel();
+
+    int pageNum = 3;
+
+    if (ViewBag.Page != null)
+    {
+        page = ViewBag.Page;
+        pageNum = page.CurrentPage;
+    }
+
+    if (ViewBag.searchModel != null)
+    {
+        searchModel = ViewBag.searchModel;
+    }
+}
+
+<h1>Коммутаторы</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Добавить коммутатор</a>
+</p>
+
+<table class="table">
+    <thead class="table-dark">
+        <form asp-action="Index">
+            <tr>
+                <th>
+                    <p><H6>@Html.DisplayNameFor(model => model.Model)</H6></p>
+                    <input class="form-control" type="text" name="searchModel.SwitchModel" value="@searchModel.SwitchModel"/>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ip)
+                    <input class="form-control ip_address" type="text" name="searchModel.Ip" value="@searchModel.Ip"/>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mac)
+                    <input class="form-control" type="text" name="searchModel.Mac" value="@searchModel.Mac"/>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VLan)
+                    <input class="form-control ip_address" type="text" name="searchModel.VLan" value="@searchModel.VLan"/>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Serial)
+                    <input class="form-control" type="text" name="searchModel.Serial" value="@searchModel.Serial"/>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateBuy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateInstallation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Floor)
+                    <input class="form-control" type="text" name="searchModel.Floor" value="@searchModel.Floor"/>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                    <input class="form-control" type="text" name="searchModel.Comment" value="@searchModel.Comment"/>
+                </th>
+                <th>
+                    <input class="btn btn-success" type="submit" value= "Поиск"/>
+                </th>
+            </tr>
+        </form>
+    </thead>
+    <tbody>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VLan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBuy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateInstallation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                <div class="row">
+                    <a id="edit-switch" class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                </div>
+                <div class="row">
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+
+<partial data="@searchModel" name="_page" model="page"/>
+
+
+
+ 
